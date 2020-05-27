@@ -24,7 +24,6 @@
       return Math.floor(Math.random() * (max - min) ) + min;
     }
     function shuffle(){
-        
         var drags = document.getElementsByClassName("dragme");
         //console.log(drags)
         for (var i = 0; i < drags.length; i++) {
@@ -36,10 +35,52 @@
             
             drags[i].src="cardback.png"
             drags[i].name="back"
-            
-            
-            //document.getElementById(theID.id).style.position="absolute";
-            
+        }
+    }
+    
+    function array_shuffle(arra1) {
+        var ctr = arra1.length, temp, index;
+        while (ctr > 0) {
+            index = Math.floor(Math.random() * ctr);
+            ctr--;
+            temp = arra1[ctr];
+            arra1[ctr] = arra1[index];
+            arra1[index] = temp;
+        }
+        return arra1;
+    }
+
+    function deal(){
+        var drags = document.getElementsByClassName("dragme");
+        console.log("# items = " + drags.length)
+        var x = [];
+        for (var i=0;i < drags.length;i++) {
+            x.push(i);
+        }
+        x=array_shuffle(x)
+        
+        console.log(x)
+        
+        //console.log(drags)
+        var posx =35
+        var posy =35
+        for (var i = 0; i < drags.length; i++) {
+            var cc=x[i]
+            console.log(i + " " + cc + " " + drags[cc].alt + " " +  drags[cc].style.left + "  " + drags[cc].style.position)
+            //console.log(i + " " + drags[i].style.left)
+            drags[cc].style.position="absolute"
+            drags[cc].style.left = posx + "px";
+            drags[cc].style.top  = posy + "px" //getRndInteger(0,window.innerHeight - 270)+"px";
+            drags[cc].src="cardback.png"
+            drags[cc].name="back"
+
+            posx += (177+10)
+            //posx += getRndInteger(-25,25)
+            //posy += getRndInteger(-25,25)
+            if (posx>window.innerWidth  - 177){
+                posx = 35 
+                posy += (270+10)
+            }
             
         }
     }
@@ -123,18 +164,20 @@
 			
 			//<div id="draggable" class="dragme">"Hello World!"</div>
 
+                //<button onclick="shuffle()">Shuffle</button>
 			</script>
 
 
 <body>
-<button onclick="shuffle()">Shuffle</button>
- 
+<button onclick="deal()">Deal</button>
+
 <img src="cardback.png" class="dragme" id="my id 1" alt="there_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 4" alt="there_1.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 3" alt="theyre_0.png" name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 6" alt="theyre_1.png" name="back" ondblclick="myFunction(this)" >
 <img src="cardback.png" class="dragme" id="my id 2" alt="their_0.png"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 3" alt="theyre_0.png" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 4" alt="there_1.png"  name="back" ondblclick="myFunction(this)" >
 <img src="cardback.png" class="dragme" id="my id 5" alt="their_1.png"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 6" alt="theyre_1.png" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 7" alt="2Diamonds.png"  name="back" ondblclick="myFunction(this)" >
  
 </body>			
 </html>			
