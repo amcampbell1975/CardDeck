@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+  .dragme{
+			position:relative;
+			width: 177px;
+			height: 270px;
+			cursor: move;
+		}
+	#draggable {
+			background-color: #ccc;
+			border: 1px solid #000;
+		}
+        
+    body {
+        background-image: url('desktop2.jpg');
+    }
+
+</style>
+<script>
+
+function myFunction(theID) {
+  //document.getElementById("demo").innerHTML = "Hello World";
+  //console.log("Double Click")
+  //console.log(theID)
+  //console.log("THE name =" + document.getElementById(theID.id).name )
+  //console.log("THE title=" + document.getElementById(theID.id).title)
+  //CHANGE HERE  !!!!!!!!!!!!!!!!!!
+  if (document.getElementById(theID.id).name=="back"){
+    //console.log("Show front")
+
+    document.getElementById(theID.id).src=document.getElementById(theID.id).title
+    document.getElementById(theID.id).name="front"
+  }else{
+    //console.log("Show back")
+    document.getElementById(theID.id).src="cardback.png"
+    document.getElementById(theID.id).name="back"
+  }
+//<img src="2Diamonds.png" 
+//alt="drag-and-drop image script" 
+// class="dragme" id="my id 1" title="foo bar" ondblclick="myFunction(this)" >
+
+  
+  //if (document.getElementById(theID.id).src=="cardback.png")
+  //{
+  //  console.log("Show front")
+  //  document.getElementById(theID.id).src=theID.title
+  //}else{
+  //  console.log("Show back")
+  //  document.getElementById(theID.id).src="cardback.png"
+  //}
+  //if (document.getElementById(theID.id).innerHTML== theID.title){
+  //  document.getElementById(theID.id).innerHTML= "Back of card"
+  //
+  //}else{
+  //  document.getElementById(theID.id).innerHTML= theID.title// "COWPAST"
+  //}
+//   <div id="draggable" class="dragme" id="mytext" title="2Diamonds.png" ondblclick="myFunction(this)" > >"Hello World!"</div>
+ 
+//<img src="cardback.png" id="foo" title="2Diamonds.png" class="dragme" ondblclick="myFunction(this)">
+
+  
+}
+ 	function startDrag(e) {
+				// determine event object
+				if (!e) {
+					var e = window.event;
+				}
+                if(e.preventDefault) e.preventDefault();
+
+				// IE uses srcElement, others use target
+				targ = e.target ? e.target : e.srcElement;
+
+				if (targ.className != 'dragme') {return};
+				// calculate event X, Y coordinates
+					offsetX = e.clientX;
+					offsetY = e.clientY;
+
+				// assign default values for top and left properties
+				if(!targ.style.left) { targ.style.left='0px'};
+				if (!targ.style.top) { targ.style.top='0px'};
+
+				// calculate integer values for top and left 
+				// properties
+				coordX = parseInt(targ.style.left);
+				coordY = parseInt(targ.style.top);
+				drag = true;
+
+				// move div element
+					document.onmousemove=dragDiv;
+                return false;
+				
+			}
+			function dragDiv(e) {
+				if (!drag) {return};
+				if (!e) { var e= window.event};
+				// var targ=e.target?e.target:e.srcElement;
+				// move div element
+				targ.style.left=coordX+e.clientX-offsetX+'px';
+				targ.style.top=coordY+e.clientY-offsetY+'px';
+				return false;
+			}
+			function stopDrag() {
+				drag=false;
+			}
+			window.onload = function() {
+				document.onmousedown = startDrag;
+				document.onmouseup = stopDrag;
+			}
+			
+			
+			//<div id="draggable" class="dragme">"Hello World!"</div>
+
+			</script>
+
+
+<body>
+
+<img src="cardback.png" class="dragme" id="my id 1" title="there_0.png"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 4" title="there_1.png"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 3" title="theyre_0.png" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 6" title="theyre_1.png" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 2" title="their_0.png"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 5" title="their_1.png"  name="back" ondblclick="myFunction(this)" >
+ 
+ 
+</body>			
+</html>			
