@@ -29,9 +29,13 @@
         for (var i = 0; i < drags.length; i++) {
             //console.log(i + " " + drags[i].alt + " " +  drags[i].style.left + "  " + drags[i].style.position)
             //console.log(i + " " + drags[i].style.left)
+
             drags[i].style.position="absolute"
             drags[i].style.left =getRndInteger(0,window.innerWidth  - 177)+"px";
             drags[i].style.top  =getRndInteger(0,window.innerHeight - 270)+"px";
+
+            //drags[i].style.visibility="hidden"
+            //drags[i].style.visibility="visible"
             
             drags[i].src="cardback.png"
             drags[i].name="back"
@@ -67,20 +71,25 @@
         for (var i = 0; i < drags.length; i++) {
             var cc=x[i]
             console.log(i + " " + cc + " " + drags[cc].alt + " " +  drags[cc].style.left + "  " + drags[cc].style.position)
-            //console.log(i + " " + drags[i].style.left)
-            drags[cc].style.position="absolute"
-            drags[cc].style.left = posx + "px";
-            drags[cc].style.top  = posy + "px" //getRndInteger(0,window.innerHeight - 270)+"px";
-            drags[cc].src="cardback.png"
-            drags[cc].name="back"
 
-            posx += (177+10)
-            //posx += getRndInteger(-25,25)
-            //posy += getRndInteger(-25,25)
-            if (posx>window.innerWidth  - 177){
-                posx = 35 
-                posy += (270+10)
-            }
+           // Only modify visible card
+           if (drags[cc].style.visibility!="hidden"){
+
+                //console.log(i + " " + drags[i].style.left)
+                drags[cc].style.position="absolute"
+                drags[cc].style.left = posx + "px";
+                drags[cc].style.top  = posy + "px" //getRndInteger(0,window.innerHeight - 270)+"px";
+                drags[cc].src="cardback.png"
+                drags[cc].name="back"
+
+                posx += (177+10)
+                //posx += getRndInteger(-25,25)
+                //posy += getRndInteger(-25,25)
+                if (posx>window.innerWidth  - 177){
+                    posx = 35 
+                    posy += (270+10)
+                }
+            }	
             
         }
     }
@@ -168,47 +177,80 @@
                 /*
    
                 */
+
+
+
+	function remove(cardtype){
+          var drags = document.getElementsByClassName("dragme");
+          //console.log(drags)
+          for (var i = 0; i < drags.length; i++) {
+             console.log( drags[i].alt)
+             console.log( drags[i].getAttribute("data-group")  ) 
+             console.log( cardtype  )               
+             if(drags[i].getAttribute("data-group")==cardtype){
+	        console.log("Swap!")
+                 drags[i].style.visibility="hidden"
+                //if (drags[i].style.visibility="hidden"){
+                //   drags[i].style.visibility="visible"
+                //}else{
+                //   drags[i].style.visibility="hidden"
+               // }
+
+             }
+	  }
+
+	}
+
+
+/*
+
+*/
 			</script>
 
 
 <body>
-<button onclick="deal()">Deal</button>
+<button onclick="deal()"           >Deal</button>
+<button onclick="remove('there')"  >Remove there</button>
+<button onclick="remove('by')"     >Remove by</button>
+<button onclick="remove('new')"    >Remove new</button>
+<button onclick="remove('peace')"  >Remove peace</button>
+<button onclick="remove('site')"   >Remove site</button>
+<button onclick="remove('through')">Remove through</button>
 
-
-<img src="there_0.png"  class="dragme" id="my id 1" alt="there_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 2" alt="there_1.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 3" alt="theyre_0.png" name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 4" alt="theyre_1.png" name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 5" alt="their_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 6" alt="their_1.png"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 1" alt="there_0.png"  data-group="there"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 2" alt="there_1.png"  data-group="there"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 3" alt="theyre_0.png" data-group="there"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 4" alt="theyre_1.png" data-group="there"   name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 5" alt="their_0.png"  data-group="there"   name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 6" alt="their_1.png"  data-group="there"   name="back" ondblclick="myFunction(this)" >
 
                
-<img src="cardback.png" class="dragme" id="my id 7"  alt="buy_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 8"  alt="buy_1.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 9"  alt="bye_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 10" alt="bye_1.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 11" alt="by_0.png"   name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 12" alt="by_1.png"   name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 7"  alt="buy_0.png"  data-group="by" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 8"  alt="buy_1.png"  data-group="by" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 9"  alt="bye_0.png"  data-group="by" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 10" alt="bye_1.png"  data-group="by" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 11" alt="by_0.png"   data-group="by" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 12" alt="by_1.png"   data-group="by" name="back" ondblclick="myFunction(this)" >
 
-<img src="cardback.png" class="dragme" id="my id 13" alt="new_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 14" alt="new_1.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 15" alt="knew_0.png" name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 16" alt="knew_1.png" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 13" alt="new_0.png"  data-group="new" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 14" alt="new_1.png"  data-group="new" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 15" alt="knew_0.png" data-group="new" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 16" alt="knew_1.png" data-group="new" name="back" ondblclick="myFunction(this)" >
 
-<img src="cardback.png" class="dragme" id="my id 17" alt="peace_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 18" alt="peace_1.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 19" alt="piece_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 20" alt="piece_1.png"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 17" alt="peace_0.png" data-group="peace"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 18" alt="peace_1.png" data-group="peace"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 19" alt="piece_0.png" data-group="peace"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 20" alt="piece_1.png" data-group="peace"  name="back" ondblclick="myFunction(this)" >
 
-<img src="cardback.png" class="dragme" id="my id 21" alt="sight_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 22" alt="sight_1.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 23" alt="site_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 24" alt="site_1.png"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 21" alt="sight_0.png" data-group="site"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 22" alt="sight_1.png" data-group="site"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 23" alt="site_0.png"  data-group="site" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 24" alt="site_1.png"  data-group="site" name="back" ondblclick="myFunction(this)" >
 
-<img src="cardback.png" class="dragme" id="my id 25" alt="though_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 26" alt="though_1.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 27" alt="through_0.png"  name="back" ondblclick="myFunction(this)" >
-<img src="cardback.png" class="dragme" id="my id 28" alt="through_1.png"  name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 25" alt="though_0.png"  data-group="through" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 26" alt="though_1.png"  data-group="through" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 27" alt="through_0.png" data-group="through" name="back" ondblclick="myFunction(this)" >
+<img src="cardback.png" class="dragme" id="my id 28" alt="through_1.png" data-group="through" name="back" ondblclick="myFunction(this)" >
 
  
 </body>			
